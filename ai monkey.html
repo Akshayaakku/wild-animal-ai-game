@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🦄 What Animal Are You? - Funny AI Game</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(120deg, #fef3c7, #fcd34d);
+      text-align: center;
+      padding: 40px;
+      color: #222;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #e11d48;
+    }
+    .emoji-btn {
+      font-size: 40px;
+      margin: 15px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: transform 0.2s;
+    }
+    .emoji-btn:hover {
+      transform: scale(1.2);
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #1e3a8a;
+      animation: bounce 1s infinite alternate;
+    }
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+    #animalFace {
+      font-size: 100px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🦁 What Animal Are You? 😂</h1>
+  <p>Pick your mood below and I’ll use my *very serious AI skills* to tell you your spirit animal...</p>
+
+  <button class="emoji-btn" onclick="matchAnimal('happy')">😄</button>
+  <button class="emoji-btn" onclick="matchAnimal('angry')">😡</button>
+  <button class="emoji-btn" onclick="matchAnimal('goofy')">🤪</button>
+  <button class="emoji-btn" onclick="matchAnimal('sleepy')">😴</button>
+
+  <div id="animalFace"></div>
+  <div id="result"></div>
+
+  <script>
+    const animals = {
+      happy: {
+        emoji: "🦄",
+        name: "Sparkle Noodle",
+        fact: "You spread rainbows, glitter, and confusion wherever you go!"
+      },
+      angry: {
+        emoji: "🦖",
+        name: "Sir Roar-a-Lot",
+        fact: "You once scared a potato. That’s power."
+      },
+      goofy: {
+        emoji: "🐒",
+        name: "Captain Banana Pants",
+        fact: "Your hobbies include slipping on air and talking to shoes."
+      },
+      sleepy: {
+        emoji: "🐌",
+        name: "Snorezilla",
+        fact: "You're the reason coffee exists. You nap in slow motion."
+      }
+    };
+
+    function speak(text) {
+      const msg = new SpeechSynthesisUtterance(text);
+      msg.pitch = 1.5;
+      msg.rate = 1;
+      window.speechSynthesis.speak(msg);
+    }
+
+    function matchAnimal(mood) {
+      const a = animals[mood];
+      const result = `
+        You are: <br> <span style="font-size:40px">${a.emoji} ${a.name}</span><br>
+        🤯 ${a.fact}
+      `;
+
+      document.getElementById("animalFace").textContent = a.emoji;
+      document.getElementById("result").innerHTML = result;
+
+      // Speak it out loud
+      speak(`You are ${a.name}. ${a.fact}`);
+    }
+  </script>
+
+</body>
+</html>
